@@ -58,15 +58,17 @@ events %>%
 # Second way: using the %in% command and using vector of values
 
 events %>% 
-  filter(state %in% c("IA", "TX"))
+  filter(state %in% c("IA", "TX", "MO"))
 ```
 
 
 ```{r}
 # And remember how we can sort
 
+mystates <- c("IA", "TX", "MO", "NH", "SC")
+
 events %>% 
-  filter(state %in% c("IA", "TX")) %>% 
+  filter(state %in% c(mystates)) %>% 
   arrange(desc(date))
 ```
 
@@ -257,7 +259,7 @@ events %>%
 ```{r}
 # top single day for most trips
 events %>% 
-  count(date, sort = TRUE)
+  count(date, sort = TRUE, name = "numtrips")
 ```
 
 
@@ -317,7 +319,7 @@ salaries %>%
 
 
 ```{r}
-# What the total paid in the league for each position?
+# What is the total paid in the league for each position?
 salaries %>% 
   group_by(pos) %>%  # <--this is all that changed
   summarise(total_dollars = sum(salary)) %>% 
